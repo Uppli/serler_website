@@ -1,0 +1,29 @@
+#navigation-bar{
+                width:500px;
+                margin:50px auto;
+                height: 60px;
+  
+}
+       
+#search {
+                background:rgba(50, 50, 50, 0.2);
+                padding:8px 15px;
+                border:0px solid #dbdbdb;
+                height: 60px;
+                width: 500px; 
+                               
+        
+}
+.button {
+                position:relative;
+                padding:6px 15px;
+                left:-8px;
+                border:2px solid #207cca;
+                background-color:#207cca;
+                color:#fafafa;
+}
+.button:hover  {
+                background-color:#fafafa;
+                color:#207cca;
+}
+

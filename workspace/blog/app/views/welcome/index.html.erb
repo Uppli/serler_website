@@ -1,0 +1,9 @@
+<font color="white"><h1>SERLER</h1>
+<p>Find me in app/views/welcome/index.html.erb</p></Font>
+<div id="navigation-bar" class="clearfix">
+<%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search" %>
+    <%= submit_tag "Search", :name => nil %>
+<% end %>
+</div>
+<%= link_to 'My Blog', controller: 'articles' %>

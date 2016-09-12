@@ -1,0 +1,42 @@
+<h1>Listing articles</h1>
+ <%= link_to 'New article', new_article_path %>
+<table>
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Text</th>
+     <th>Author</th>
+      <th>DOI</th>
+       <th>Content</th>
+        <th>Keywords</th>
+         <th>Language</th>
+          <th>File Type</th>
+           <th>Abstract</th>
+            <th>URL</th>
+             <th>File Size(mb)</th>
+              <th>Created On</th>
+               <th>Last Updated</th>
+  </tr>
+ </thead>
+  <% @articles.each do |article| %>
+  <tbody>
+    <tr>
+      <td><%= article.title %></td>
+      <td><%= article.text %></td>
+      <td><%= article.Author %></td>
+      <td><%= article.DOI %></td>
+      <td><%= article.Content %></td>
+      <td><%= article.Keywords %></td>
+      <td><%= article.Language %></td>
+      <td><%= article.File_Type %></td>
+      <td><%= article.Abstract %></td>
+      <td><%= article.File_URl %></td>
+      <td><%= article.File_Size %></td>
+      <td><%= article.created_at %></td>
+      <td><%= article.updated_at %></td>
+      <td><%= link_to 'Show', article_path(article) %></td>
+      <td><%= link_to 'Edit', edit_article_path(article) %></td>
+    </tr>
+  </tbody>      
+  <% end %>
+</table>

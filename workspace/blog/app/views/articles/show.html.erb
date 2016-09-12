@@ -1,0 +1,56 @@
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+ 
+<p>
+  <strong>Text:</strong>
+  <%= @article.text %>
+</p>
+<p>
+  <strong>Author:</strong>
+  <%= @article.Author %>
+</p>
+<p>
+  <strong>DOI:</strong>
+  <%= @article.DOI %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= @article.Content %>
+</p>
+<p>
+  <strong>Keywords:</strong>
+  <%= @article.Keywords %>
+</p>
+<p>
+  <strong>Language:</strong>
+  <%= @article.Language %>
+</p>
+<p>
+  <strong>File Type:</strong>
+  <%= @article.File_Type %>
+</p>
+<p>
+  <strong>Abstract:</strong>
+  <%= @article.Abstract %>
+</p>
+<p>
+  <strong>URL:</strong>
+  <%= @article.File_URl %>
+</p>
+<p>
+  <strong>File Size(mb):</strong>
+  <%= @article.File_Size %>
+</p>
+
+<p>
+  <strong>Created On:</strong>
+  <%= @article.created_at %>
+</p>
+<p>
+  <strong>Last Updated On:</strong>
+  <%= @article.updated_at %>
+</p>
+<td><%= link_to 'Edit', edit_article_path(@article) %></td>
+<%= link_to 'Back', articles_path %>
