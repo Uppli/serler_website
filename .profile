@@ -28,3 +28,5 @@ unset npm # end hack
 [ "$BASH_VERSION" ] && npm() { if [ "$*" == "config get prefix" ]; then which node | sed "s/bin\/node//"; else $(which npm) "$@"; fi } # hack: avoid slow npm sanity check in nvm
 [ -s "/home/ubuntu/.nvm/nvm.sh" ] && . "/home/ubuntu/.nvm/nvm.sh" # This loads nvm
 unset npm # end hack
+export USERNAME=uppli_db2
+export PASSWORD=mar2015#

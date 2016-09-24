@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160910041648) do
+ActiveRecord::Schema.define(version: 20160921062307) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.text     "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "Language"
     t.string   "File_Type"
     t.string   "Abstract"
@@ -26,6 +29,28 @@ ActiveRecord::Schema.define(version: 20160910041648) do
     t.string   "Author"
     t.string   "Content"
     t.string   "Keywords"
+    t.string   "keywords"
+    t.string   "research_method"
+    t.string   "research_part"
+    t.string   "se_method"
+    t.string   "methodology"
+    t.integer  "rating"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string   "keywords1"
+    t.string   "title1"
+    t.string   "author1"
+    t.datetime "from_year"
+    t.datetime "to_year"
+    t.string   "language1"
+    t.string   "research_method1"
+    t.string   "research_part1"
+    t.string   "se_method1"
+    t.string   "methodology1"
+    t.integer  "rating1"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
 
 end
