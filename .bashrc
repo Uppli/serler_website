@@ -54,3 +54,5 @@ esac
 
 export rvm_silence_path_mismatch_check_flag=1
 
+alias server="rails server -b $IP -p $PORT"
+alias guard="bundle exec guard"
