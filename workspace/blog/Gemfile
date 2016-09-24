@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'bootstrap-sass'
+gem 'pg'
 #gem 'sprockets'
 #gem 'bootstrap'
 #gem 'sass-rails', github: 'guilleiguaran/sass-rails', branch: 'backport'
@@ -35,10 +36,15 @@ gem 'compass'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+  gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end
-
+group :test do
+gem 'capybara'
+gem 'cucumber-rails', require: false
+gem 'database_cleaner'
+end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'

@@ -13,19 +13,39 @@
       </ul>
     </div>
   <% end %>
-  
+  <br>
   <p>
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </p>
- 
-  <p>
-    <%= f.label :text %><br>
-    <%= f.text_area :text %>
+ <p>
+    <%= f.label :Keywords %><br>
+    <%= f.text_area :Keywords %>
   </p>
+  
   <p>
     <%= f.label :Author %><br>
     <%= f.text_area :Author %>
+  </p>
+    <p>
+    <%= f.label :Research %> <%= f.label :Method%><br>
+    <%= f.text_area :research_method %>
+  </p>
+   <p>
+    <%= f.label :Research %> <%= f.label :Participant%><br>
+    <%= f.text_area :research_part %>
+  </p>
+   <p>
+    <%= f.label :SE %> <%= f.label :Method%><br>
+    <%= f.text_area :se_method %>
+  </p>
+  <p>
+    <%= f.label :Methodology %><br>
+    <%= f.text_area :methodology %>
+  </p>
+  <p>
+    <%= f.label :Credibilty %> <%= f.label :Ratings%><br>
+    <%= f.text_area :rating %>
   </p>
   <p>
     <%= f.label :DOI %><br>
@@ -35,10 +55,7 @@
     <%= f.label :Content %><br>
     <%= f.text_area :Content %>
   </p>
-  <p>
-    <%= f.label :Keywords %><br>
-    <%= f.text_area :Keywords %>
-  </p>
+  
   <p>
     <%= f.label :Language %><br>
     <%= f.text_area :Language %>
@@ -56,7 +73,7 @@
     <%= f.text_area :File_URl %>
   </p>
   <p>
-    <%= f.label :File%> <%= f.label :Size(mb) %><br><br>
+    <%= f.label :FileSize %><br>
     <%= f.text_area :File_Size %>
   </p>
   
