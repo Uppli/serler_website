@@ -2,6 +2,12 @@ class SearchesController < ApplicationController
     def new
     @search = Search.new
     @research_method1 = Article.uniq.pluck(:research_method)
+
+    @research_part = Article.uniq.pluck(:research_part)
+    @se_method = Article.uniq.pluck(:se_method)
+    @methodology = Article.uniq.pluck(:methodology)
+    @ratings = Article.uniq.pluck(:rating)
+
     end
     
     def create
