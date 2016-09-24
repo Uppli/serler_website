@@ -1,0 +1,60 @@
+<h1>Advanced Search</h1>
+
+<%= form_for @search do |s| %> <%#, html: {class: "pure_form"}%>
+
+<div class = "field">
+    <%= s.label :Keywords %> <br/>
+    <%= s.text_field :keywords1 %>
+</div>
+
+<div class = "field">
+    <%= s.label :Title %> <br/>
+    <%= s.text_field :title1 %>
+</div>
+
+<div class = "field">
+    <%= s.label :Author %> <br/>
+    <%= s.text_field :author1 %>
+</div>
+
+<div class = "field">
+    <p><%= s.label :from_year, "From Year"%> - <%= s.text_field :from_year, size: 4 %></p>
+    <p><%= s.label :to_year, "To Year" %> - <%= s.text_field :to_year, size: 4 %></p>
+</div>
+
+<div class = "field">
+    <%= s.label :Language %> <br/>
+    <%= s.text_field :language1 %>
+</div>
+
+<div class = "field">
+    <%= s.label :Research_Method %> <br/>
+    <%#= s.text_field :research_method1 %> 
+    <%= s.select :research_method1, options_for_select(@research_method1), :include_blank => true %>
+</div>
+
+<div class = "field">
+    <%= s.label :Research_Participant %> <br/>
+    <%= s.text_field :research_part1 %>
+</div>
+
+<div class = "field">
+    <%= s.label :SE_Method %> <br/>
+    <%= s.text_field :se_method1 %>
+</div>
+
+<div class = "field">
+    <%= s.label :Methodology %> <br/>
+    <%= s.text_field :methodology1 %>
+</div>
+
+<div class = "field">
+    <%= s.label :Ratings %> <br/>
+    <%= s.text_field :rating1 %>
+</div>
+
+
+<div class = "actions">
+    <%= s.submit :search  %> <%#, class: "pure-button pure-button-primary"%>
+</div>
+<% end %>
