@@ -1,9 +1,10 @@
 <h1>Listing articles</h1>
  <%= link_to 'New article', new_article_path %>
-<table>
+<table class = "container", data-url="data3.json" data-height="299" data-show-columns="true" data-id-field="id">
  
   <thead>
   <tr>
+   
     <th>Title</th>
     <th>Keywords</th>
      <th>Author</th>
@@ -23,6 +24,7 @@
                <th>Last Updated</th>
   </tr>
  </thead>
+ 
   <% @articles.each do |article| %>
   <tbody>
     <tr>

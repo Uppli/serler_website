@@ -10,23 +10,56 @@
  
  <% else %>
  
- <% @search.search_articles.each do |c| %>
- <br>
- <div class= "div">
-  <h1><%= c.title %></h1>
-  <p>Author : <%= c.Author %></p>
-<<<<<<< HEAD
-  
-=======
-  <p>Language : <% c.Language %></p>
->>>>>>> uppli
-  <p>Research_Method : <%= c.research_method %></p>
-  <p>Research_Participant : <%= c.research_part %></p>
-  <p>SE Method : <%= c.se_method %></p>
-  <p>Methodology : <%= c.methodology %></p>
-  <p>Ratings : <%= c.rating %></p>
-  
- </div>
  
+ <table class = "container">
+ 
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Keywords</th>
+     <th>Author</th>
+     <th>Research Method</th>
+     <th>Research Participant</th>
+     <th>SE Method</th>
+     <th>Methodology</th>
+     <th>Credibility Ratings</th>
+      <th>DOI</th>
+       <th>Content</th>
+         <th>Language</th>
+          <th>File Type</th>
+           <th>Abstract</th>
+            <th>URL</th>
+             <th>File Size(mb)</th>
+              <th>Created On</th>
+               <th>Last Updated</th>
+  </tr>
+ </thead>
+  <% @search.search_articles.each do |article| %>
+  <tbody>
+    <tr>
+     <br>
+      <td><%= article.title %></td>
+      <td><%= article.Keywords %></td>
+      <td><%= article.Author %></td>
+      <td><%= article.research_method %></td>
+      <td><%= article.research_part %></td>
+      <td><%= article.se_method %></td>
+      <td><%= article.methodology %></td>
+      <td><%= article.rating %></td>
+      <td><%= article.DOI %></td>
+      <td><%= article.Content %></td>
+      <td><%= article.Language %></td>
+      <td><%= article.File_Type %></td>
+      <td><%= article.Abstract %></td>
+      <td><%= article.File_URl %></td>
+      <td><%= article.File_Size %></td>
+      <td><%= article.created_at %></td>
+      <td><%= article.updated_at %></td>
+      <td><%= link_to 'Show', article_path(article) %></td>
+      <td><%= link_to 'Edit', edit_article_path(article) %></td>
+    </tr>
+  </tbody>  
+  <%# end %>
+</table>
  <% end %>
  <% end %>

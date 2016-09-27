@@ -2,9 +2,11 @@
 
 <%= form_for @search do |s| %> <%#, html: {class: "pure_form"}%>
 
-<div class = "field">
+<div class = "field" >
+    
     <%= s.label :Keywords %> <br/>
     <%= s.text_field :keywords1 %>
+   
 </div>
 
 <div class = "field">
@@ -35,38 +37,29 @@
 
 <div class = "field">
     <%= s.label :Research_Participant %> <br/>
-<<<<<<< HEAD
-    
-=======
     <%= s.select :research_part1, options_for_select(@research_part), :include_blank => true %>
->>>>>>> uppli
+
 </div>
 
 <div class = "field">
     <%= s.label :SE_Method %> <br/>
-<<<<<<< HEAD
-  
-=======
+
     <%= s.select :se_method1, options_for_select(@se_method), :include_blank => true %>
->>>>>>> uppli
+
 </div>
 
 <div class = "field">
     <%= s.label :Methodology %> <br/>
-<<<<<<< HEAD
-    
-=======
+
     <%= s.select :methodology1, options_for_select(@methodology), :include_blank => true %>
->>>>>>> uppli
+
 </div>
 
 <div class = "field">
     <%= s.label :Ratings %> <br/>
-<<<<<<< HEAD
-   
-=======
+
     <%= s.select :rating1, options_for_select(@ratings), :include_blank => true %>
->>>>>>> uppli
+
 </div>
 
 
