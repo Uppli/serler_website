@@ -1,9 +1,10 @@
 require 'rails_helper'
+require 'spec_helper'
 
 
 describe "Serler" do
 end
-RSpec.describe Article, :type => :model do
+describe Article, :type => :model do
   it "is valid with valid attributes" do
     expect(Article.new).to_not be_valid
   end
