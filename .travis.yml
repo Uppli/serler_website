@@ -1,0 +1,4 @@
+language: ruby
+ruby:
+    -"2.3.0"
+script: ruby spec/features/articles_tests_spec.rb
