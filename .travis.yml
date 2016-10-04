@@ -1,6 +1,10 @@
 language: ruby
-ruby:
-    -"2.3.0"
+
 rvm:
-  - 2.2.2
-script: "bundle exec rake knapsack:rspec"
+  - 2.3.0
+before_script:
+  - bundle exec rake db:create
+  - bundle exec rake db:migrate
+script: 
+  - bundle exec rspec
+
