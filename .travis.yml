@@ -3,4 +3,4 @@ ruby:
     -"2.3.0"
 rvm:
   - 2.2.2
-script: ruby spec/features/articles_tests_spec.rb
+script: "bundle exec rake knapsack:rspec"
