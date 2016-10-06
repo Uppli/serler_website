@@ -35,7 +35,7 @@ class ArticlesController < ApplicationController
             render 'edit'
         end
     end
-    # render plain: params[:article].inspect
+        # render plain: params[:article].inspect
     private
    def article_params
     params.require(:article).permit(:title, :keywords, :research_method, :research_part, :se_method, :methodology, :rating,  :created_at, :updated_at, :Language, :File_Type, :Abstract, :DOI, :File_Size, :File_URl, :Author, :Content,)

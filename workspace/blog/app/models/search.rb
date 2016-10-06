@@ -4,7 +4,7 @@ def search_articles
         articles = Article.all
 
       
-    $where =" (1=1) "
+    #$where = " (1=1) "
 
     for i in 0.."#{keywords1}".split('$').length-1
         
