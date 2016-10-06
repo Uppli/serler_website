@@ -21,7 +21,7 @@ def search_articles
   
       #  articles = articles.where([' xs ? ',$number])
       
-    $where =" "
+    $where =" 1=1 "
 
     for i in 0.."#{keywords1}".split('$').length-1
         
@@ -41,8 +41,8 @@ def search_articles
 
      
 
-         articles = articles.where($where)
-  
+        # articles = articles.where(['a=?',$where])
+   articles = articles.where($where)
        
      # articles= articles.where(["1=?",articles])
      # articles = articles.where(["keywords in (?)","%#{keywords1}%"]) if keywords1.present?
