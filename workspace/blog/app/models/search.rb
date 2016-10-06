@@ -2,7 +2,7 @@ class Search < ApplicationRecord
     
 def search_articles
         articles = Article.all
-        
+
       #  articles = articles.where(["keywords in (?)","%#{keywords1}%"]) if keywords1.present?
      #   articles = articles.where(["title LIKE ?","%#{title1}%"]) if title1.present?
      #   articles = articles.where(["author LIKE ?","%#{author1}%"]) if author1.present?
@@ -47,6 +47,7 @@ def search_articles
      # articles= articles.where(["1=?",articles])
      # articles = articles.where(["keywords in (?)","%#{keywords1}%"]) if keywords1.present?
         
+
         return articles
 end
 end
