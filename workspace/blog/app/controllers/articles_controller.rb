@@ -8,7 +8,9 @@ class ArticlesController < ApplicationController
     def edit
         @article = Article.find(params[:id])
     end
+    
     def index
+    
     #@articles = Article.all
     if params[:search]
     @articles = Article.search(params[:search]).order("created_at DESC")
@@ -36,7 +38,7 @@ class ArticlesController < ApplicationController
     # render plain: params[:article].inspect
     private
    def article_params
-    params.require(:article).permit(:title, :Keywords, :research_method, :research_part, :se_method, :methodology, :rating,  :created_at, :updated_at, :Language, :File_Type, :Abstract, :DOI, :File_Size, :File_URl, :Author, :Content,)
+    params.require(:article).permit(:title, :keywords, :research_method, :research_part, :se_method, :methodology, :rating,  :created_at, :updated_at, :Language, :File_Type, :Abstract, :DOI, :File_Size, :File_URl, :Author, :Content,)
    end
     
 end

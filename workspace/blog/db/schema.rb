@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 20160921062307) do
     t.string   "File_URl"
     t.string   "Author"
     t.string   "Content"
-    t.string   "Keywords"
     t.string   "keywords"
     t.string   "research_method"
     t.string   "research_part"

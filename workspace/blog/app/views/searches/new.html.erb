@@ -1,60 +1,174 @@
-<h1>Advanced Search</h1>
 
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery.json-2.3.min.js"></script>
+    
+<h1>Advanced Search</h1>
+  <script type="text/javascript">
+
+        //新增行
+        function addnewline() {
+            var list = [];
+            list.push(' <div class="row form-group query">');
+            list.push(' <div class="col-xs-2">');
+            list.push(' <select class="form-control">');
+            list.push(' <option value="and"> and </option>');
+            list.push(' <option value="or"> or </option> ');
+            list.push(' </select>');
+            list.push(' </div>');
+            list.push(' <div class="col-xs-2">');
+            list.push(' <select class="form-control">');
+            list.push(' <option value="keywords">keywords</option>');
+            list.push(' <option value="title">title</option>');
+          //  list.push(' <option value="Author">Author</option>');
+          //    list.push(' <option value="language">language</option>');
+            list.push(' <option value="research_method">research_method</option>');
+            list.push(' <option value="research_part">research_part</option>');
+            list.push(' <option value="se_method">se_method</option>');
+            list.push(' <option value="methodology">methodology</option>');
+            list.push(' <option value="rating">rating</option>');
+            list.push(' </select>');
+            list.push(' </div>');
+            list.push(' <div class="col-xs-1 text-center"">');
+            list.push(' in ');
+            list.push(' </div>');
+            list.push(' <div class="col-xs-2">');
+            list.push(' <input type="text" class="form-control" />');
+            list.push(' </div>');
+            list.push(' <div class="col-xs-1">');
+            list.push(' <input type="button" value="del" class="btn btn-info form-control" onclick="ondelquery(this)" />');
+            list.push(' </div>');
+            list.push(' </div>');
+
+            var html = "";
+            for (var i = 0; i < list.length; i++) {
+                html += list[i];
+            }
+            $("#divquerymain").append(html);
+        }
+        //删除当前条件
+        function ondelquery(obj)
+        {
+            $(obj).parent().parent().remove();
+        }
+        function getquery()
+        {
+            var list = [];
+
+            //获取第一个条件
+            var column = $(".queryfirst").find("select").first().val();
+            var val = $("#txtQu").val();
+            
+            var link = "";
+            if (val == "") {
+                val = "-1";
+            }
+            list.push("-1#" + column + "#" + val + "$");
+
+            //自定义的条件
+            $(".query").each(function () {
+                var link = $(this).find("select").first().val();
+                var column = $(this).find("select").last().val();
+                var val = $(this).find(":text").first().val();
+                if (val == "")
+                {
+                    val = "-1";
+                }
+                list.push(link + "#" + column + "#" + val + "$");
+            });
+            var html = "";
+            for (var i = 0; i < list.length; i++) {
+                html += list[i];
+            }
+            $("#search_keywords1").val(html);
+            //alert(html);
+            return true;
+        }
+          function getquerysql()
+        {
+            var list = [];
+
+            //获取第一个条件
+            var column = $(".queryfirst").find("select").first().val();
+            var val = $(".queryfirst").find(":text").first().val();
+            var link = ""; 
+           if (val != "") {
+                list.push("#{" + column + "}:" + link + "#" + val + ";");
+            } else {
+                list.push("2=2");
+            }
+            
+
+            //自定义的条件
+            $(".query").each(function () {
+                var link = $(this).find("select").first().val();
+                var column = $(this).find("select").last().val();
+                var val = $(this).find(":text").first().val();
+                list.push(link + " " + column + " in ('" + val + "') ");
+            });
+            var html = "";
+            for (var i = 0; i < list.length; i++) {
+                html += list[i];
+            }
+            $("#search_keywords1").val(html);
+        }
+        
+         
+        $(function () {
+            //$("#search_keywords1").val("");
+        })
+    </script>
+    
 <%= form_for @search do |s| %> <%#, html: {class: "pure_form"}%>
 
-<div class = "field">
-    <%= s.label :Keywords %> <br/>
-    <%= s.text_field :keywords1 %>
-</div>
+    <div class="container">
+        <br />
+        <br />
+        <div class="row form-group queryfirst">
+            <div class="col-xs-2">
+            <input type="hidden" id="txtQuery" />
+            <%= s.text_field :keywords1,class:"form-control hidden"  %>
+            </div>
+            <div class="col-xs-2">
+                <select class="form-control">
+                    <option value="keywords">keywords</option>
+                    <option value="title">title</option>
+                  
+                    <option value="research_method">research_method</option>
+                    <option value="research_part">research_part</option>
+                    <option value="se_method">se_method</option>
+                    <option value="methodology">methodology</option>
+                    <option value="rating">rating</option>
+                </select>
+            </div>
+            <div class="col-xs-1 text-center">
+                in
+            </div>
+            <div class="col-xs-2">
+                <input type="text" class="form-control" id="txtQu"/>
+            </div>
+            <div class="col-xs-1">
+                <input type="button" value="del" class="btn btn-info form-control" />
+            </div>
+        </div>
+        <div id="divquerymain">
 
-<div class = "field">
-    <%= s.label :Title %> <br/>
-    <%= s.text_field :title1 %>
-</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row form-group">
+            <div class="col-xs-2"></div>
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-2">
+                <input type="button" value="add new line" class="btn btn-info form-control" onclick="addnewline();" />
+            </div>
+            <div class="col-xs-2 hidden">
+                <input type="button" value="search" class="btn btn-info form-control" onclick="getquery();" />
+            </div>
+            <div class="col-xs-2"><%= s.submit :search,class:"btn btn-info form-control" , onclick:"return getquery();" %> </div>
+        </div>
+    </div>
 
-<div class = "field">
-    <%= s.label :Author %> <br/>
-    <%= s.text_field :author1 %>
-</div>
-
-<div class = "field">
-    <p><%= s.label :from_year, "From Year"%> - <%= s.text_field :from_year, size: 4 %></p>
-    <p><%= s.label :to_year, "To Year" %> - <%= s.text_field :to_year, size: 4 %></p>
-</div>
-
-<div class = "field">
-    <%= s.label :Language %> <br/>
-    <%= s.text_field :language1 %>
-</div>
-
-<div class = "field">
-    <%= s.label :Research_Method %> <br/>
-    <%#= s.text_field :research_method1 %> 
-    <%= s.select :research_method1, options_for_select(@research_method1), :include_blank => true %>
-</div>
-
-<div class = "field">
-    <%= s.label :Research_Participant %> <br/>
-    <%= s.select :research_part1, options_for_select(@research_part), :include_blank => true %>
-</div>
-
-<div class = "field">
-    <%= s.label :SE_Method %> <br/>
-    <%= s.select :se_method1, options_for_select(@se_method), :include_blank => true %>
-</div>
-
-<div class = "field">
-    <%= s.label :Methodology %> <br/>
-    <%= s.select :methodology1, options_for_select(@methodology), :include_blank => true %>
-</div>
-
-<div class = "field">
-    <%= s.label :Ratings %> <br/>
-    <%= s.select :rating1, options_for_select(@ratings), :include_blank => true %>
-</div>
-
-
-<div class = "actions">
-    <%= s.submit :search  %> <%#, class: "pure-button pure-button-primary"%>
-</div>
 <% end %>

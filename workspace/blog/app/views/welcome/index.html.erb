@@ -1,12 +1,48 @@
-<font color="white"><h1>SERLER</h1>
-<div id="Logo">
-<%= image_tag ("canvas.png") %>
-</div>
-<div id="navigation-bar" class="clearfix">
+<script type="text/javascript">
+
+ function oncheckkey()
+ {
+  var val = document.getElementById("search").value;
+  if(val == "")
+  {
+   document.getElementById("pmsg").innerText=" enter one or more keywords!";
+   //alert("please input key...");
+   return false;
+  }
+  return true;
+ }
+</script>
+
 <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
-    <%= text_field_tag :search, params[:search], placeholder: "Search" %>
-    <%= submit_tag "Search", :name => nil %>
+<div class="container">
+ <div class="row form-group" style="margin-top:60px;" >
+  <div class="col-xs-6 col-xs-offset-5">
+   <%= image_tag ("canvas.png") %> 
+   </div>
+   </div>
+ <div class="row form-group" style="margin-top:30px;" >
+  <div class="col-xs-4"></div>
+  <div class="col-xs-4">
+   <%= text_field_tag :search, params[:search], placeholder: "enter one or more keywords...",class:"form-control" %>
+   
+  </div>
+  <div class="col-xs-1"> <%= submit_tag "Search",class:"form-control", :name => nil,class:"form-control",onclick:"return oncheckkey();" %></div>
+  
+ </div>
+ 
+ <div class="row form-group">
+  <div class="col-xs-4"></div>
+  <div class="col-xs-2">
+   <%= link_to 'Advanced Search', new_search_path,:class=>'btn btn-sm btn-primary form-control' %></div>
+  <div class="col-xs-2"> <%= link_to 'List Articles', {:controller=> 'articles'},:class=>'btn btn-sm btn-info form-control' %></div>
+ </div>
+ <div class="row form-group">
+  <div class="col-xs-4"></div>
+  <div class="col-xs-8">
+   <p class="text-danger" id="pmsg"></p>
+  </div>
+ </div>
 <% end %>
+
+
 </div>
-<%= link_to 'Advanced Search', new_search_path %>
-<%= link_to 'My Blog', controller: 'articles' %>

@@ -21,6 +21,6 @@ class SearchesController < ApplicationController
     
     private
     def search_params
-        params.require(:search).permit(:keywords1, :title1, :author1, :from_year, :to_year, :language1, :research_method1, :research_part1, :se_method1, :methodology1, :rating1)
+        params.require(:search).permit(:keywords1, :title1, :Author, :from_year, :to_year, :language1, :research_method1, :research_part1, :se_method1, :methodology1, :rating1)
     end
 end
