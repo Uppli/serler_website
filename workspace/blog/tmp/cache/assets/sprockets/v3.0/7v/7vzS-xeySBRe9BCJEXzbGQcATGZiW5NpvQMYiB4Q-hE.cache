@@ -1,40 +1,0 @@
-{:uriI"šfile://app/assets/Scripts/Plugs/kindeditor/plugins/template/html/3.html?type=text/html&id=5592c18f24470d0d2d12f264f91dd10bdeff75a63655e06f790f148296669e70:ET:load_pathI"app/assets/Scripts;T:filenameI"Eapp/assets/Scripts/Plugs/kindeditor/plugins/template/html/3.html;T:	nameI"-Plugs/kindeditor/plugins/template/html/3;T:logical_pathI"2Plugs/kindeditor/plugins/template/html/3.html;T:content_typeI"text/html;T:sourceI"R<!doctype html>
-<html>
-<head>
-	<meta charset="utf-8" />
-</head>
-<body>
-	<p>
-		åœ¨æ­¤å¤„è¾“å…¥å†…å®¹
-	</p>
-	<ol>
-		<li>
-			æè¿°1
-		</li>
-		<li>
-			æè¿°2
-		</li>
-		<li>
-			æè¿°3
-		</li>
-	</ol>
-	<p>
-		åœ¨æ­¤å¤„è¾“å…¥å†…å®¹
-	</p>
-	<ul>
-		<li>
-			æè¿°1
-		</li>
-		<li>
-			æè¿°2
-		</li>
-		<li>
-			æè¿°3
-		</li>
-	</ul>
-</body>
-</html>;T:metadata{	:dependencieso:Set:
-@hash}
-I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"2processors:type=text/html&file_type=text/html;TTI"Sfile-digest://app/assets/Scripts/Plugs/kindeditor/plugins/template/html/3.html;TTF:charsetI"
-utf-8;F:digest"%»? MÅ—[ÉBhËm0›ÜÍñ2b]4ÅS“]:lengthiR:dependencies_digest"%*ßEE¶·?‹á43F]å¨Ôj—PyÙ«À®’û•:idI"E5592c18f24470d0d2d12f264f91dd10bdeff75a63655e06f790f148296669e70;F:
-mtimel+H6ûW
