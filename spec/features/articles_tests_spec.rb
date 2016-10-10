@@ -29,4 +29,12 @@ describe "SERLER" do
   page.should have_selector('h1', :text => 'Advanced Search')
   end
 end
+describe "SEARCH BUTTON" do
+  it do
+  visit '/'
+  first('input[type="submit"]').click
+  end
+end
+
+
 
