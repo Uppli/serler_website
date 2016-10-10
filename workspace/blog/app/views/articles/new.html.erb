@@ -1,0 +1,73 @@
+<%= form_for :article, url: articles_path do |f| %>
+
+<% if @article.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@article.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @article.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <br>
+  <div class="container">
+  <div class="row">
+    <div class="col-xs-1">
+      <%= f.label :title %>  
+    </div>
+    <div class="col-xs-2">
+    <%= f.text_field :title %>  
+    </div>
+    <div class="col-xs-1">
+      <%= f.label :keywords %>
+      </div>
+      <div class="col-xs-2">
+        <%= f.text_field :keywords %>
+      </div>
+      <div class="col-xs-1"><%= f.label :author %>
+        </div>
+        <div class="col-xs-2">
+    <%= f.text_field :author %>
+        </div> 
+        <div class="col-xs-1"><%= f.label :Research %> <%= f.label :Method%>
+        </div>
+        <div class="col-xs-2"><%= f.text_area :research_method %>
+        </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-1"><%= f.label :Research %> <%= f.label :Participant%></div>
+    <div class="col-xs-2"><%= f.text_area :research_part %></div>
+    <div class="col-xs-1"><%= f.label :SE %> <%= f.label :Method%></div>
+    <div class="col-xs-2"><%= f.text_area :se_method %></div>
+    <div class="col-xs-1"><%= f.label :Methodology %></div>
+    <div class="col-xs-2">    <%= f.text_area :methodology %></div>
+    <div class="col-xs-1"><%= f.label :Credibilty %> <%= f.label :Ratings%></div>
+    <div class="col-xs-2"><%= f.text_area :rating %></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-1"><%= f.label :DOI %></div>
+    <div class="col-xs-2"> <%= f.text_area :DOI %></div>
+    <div class="col-xs-1"><%= f.label :Content %></div>
+    <div class="col-xs-2"><%= f.text_area :Content %></div>
+    <div class="col-xs-1"><%= f.label :Language %></div>
+    <div class="col-xs-2"><%= f.text_area :Language %></div>
+    <div class="col-xs-1"><%= f.label :File %> <%= f.label :Type %></div>
+    <div class="col-xs-2"><%= f.text_area :File_Type %></div>
+  </div>
+  <div class="row">
+    <div class="col-xs-1"><%= f.label :Abstract %></div>
+    <div class="col-xs-2"><%= f.text_area :Abstract %></div>
+    <div class="col-xs-1"><%= f.label :URL %></div>
+    <div class="col-xs-2"><%= f.text_area :File_URl %></div>
+    <div class="col-xs-1"><%= f.label :FileSize %></div>
+    <div class="col-xs-2"><%= f.text_area :File_Size %></div>
+    <div class="col-xs-1"></div>
+    <div class="col-xs-2"><%= f.submit %></div>
+  </div>
+<% end %>
+<%= link_to 'Back', articles_path %>
