@@ -138,7 +138,7 @@
    <tr> 
       <td class="cTitle"><p class="listtd"><%= c.title %></p></td>
       <td class="cKeywords"><p class="listtd"><%= c.keywords %></p></td>
-      <td class="cAuthor"><%= c.Author %></td>
+      <td class="cAuthor"><%= c.author %></td>
       <td class="cMethod"><%= c.research_method %></td>
       <td class="cParticipant"><%= c.research_part %></td>
       <td class="cseMethod" ><%= c.se_method %></td>
@@ -156,12 +156,11 @@
       <td  class="cLastupdate"><%= c.updated_at %></td>
       <td class="coption"><%= link_to 'Show', article_path(c) %> | <%= link_to 'Edit', edit_article_path(c) %></td>
     </tr> 
-
- </tbody>
  <% end %>
+   </tbody>
  </table>
  
   </div>
-   <% end %>
+ <% end %>
 
  

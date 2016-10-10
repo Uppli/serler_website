@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20160921062307) do
     t.string   "DOI"
     t.float    "File_Size"
     t.string   "File_URl"
-    t.string   "Author"
+    t.string   "author"  
     t.string   "Content"
     t.string   "keywords"
     t.string   "research_method"
