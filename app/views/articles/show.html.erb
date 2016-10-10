@@ -1,51 +1,73 @@
-<table class = "container">
+
  
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Keywords</th>
-     <th>Author</th>
-     <th>Research Method</th>
-     <th>Research Participant</th>
-     <th>SE Method</th>
-     <th>Methodology</th>
-     <th>Credibility Ratings</th>
-      <th>DOI</th>
-       <th>Content</th>
-         <th>Language</th>
-          <th>File Type</th>
-           <th>Abstract</th>
-            <th>URL</th>
-             <th>File Size(mb)</th>
-              <th>Created On</th>
-               <th>Last Updated</th>
-  </tr>
- </thead>
-  <%# @articles do |article| %>
-  <tbody>
-    <tr>
-     <br>
-      <td><%= @article.title %></td>
-      <td><%= @article.Keywords %></td>
-      <td><%= @article.Author %></td>
-      <td><%= @article.research_method %></td>
-      <td><%= @article.research_part %></td>
-      <td><%= @article.se_method %></td>
-      <td><%= @article.methodology %></td>
-      <td><%= @article.rating %></td>
-      <td><%= @article.DOI %></td>
-      <td><%= @article.Content %></td>
-      <td><%= @article.Language %></td>
-      <td><%= @article.File_Type %></td>
-      <td><%= @article.Abstract %></td>
-      <td><%= @article.File_URl %></td>
-      <td><%= @article.File_Size %></td>
-      <td><%= @article.created_at %></td>
-      <td><%= @article.updated_at %></td>
-      </tr>
-  </tbody>  
- 
-  <%# end %>
-</table>
-<%= link_to 'Edit', edit_article_path(@article) %>
+
+<p>
+  <strong>keywords:</strong>
+  <%= @article.keywords %>
+</p>
+<p>
+  <strong>Author:</strong>
+  <%= @article.Author %>
+</p>
+<p>
+  <strong>Research Method:</strong>
+  <%= @article.research_method %>
+</p>
+<p>
+  <strong>Research Participant:</strong>
+  <%= @article.research_part %>
+</p>
+<p>
+  <strong>SE Method:</strong>
+  <%= @article.se_method %>
+</p>
+<p>
+  <strong>Methodology:</strong>
+  <%= @article.methodology %>
+</p>
+<p>
+  <strong>Credibilty Ratings:</strong>
+  <%= @article.rating %>
+</p>
+<p>
+  <strong>DOI:</strong>
+  <%= @article.DOI %>
+</p>
+<p>
+  <strong>Content:</strong>
+  <%= @article.Content %>
+</p>
+
+<p>
+  <strong>Language:</strong>
+  <%= @article.Language %>
+</p>
+<p>
+  <strong>File Type:</strong>
+  <%= @article.File_Type %>
+</p>
+<p>
+  <strong>Abstract:</strong>
+  <%= @article.Abstract %>
+</p>
+<p>
+  <strong>URL:</strong>
+  <%= @article.File_URl %>
+</p>
+<p>
+  <strong>File Size(mb):</strong>
+  <%= @article.File_Size %>
+</p>
+
+<p>
+  <strong>Created On:</strong>
+  <%= @article.created_at %>
+</p>
+<p>
+  <strong>Last Updated On:</strong>
+  <%= @article.updated_at %>
+</p>
+
+<td><%= link_to 'Edit', edit_article_path(@article) %></td>
 <%= link_to 'Back', articles_path %>
+

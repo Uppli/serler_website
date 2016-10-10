@@ -1,55 +1,157 @@
+
 <h1>Listing articles</h1>
+
+
+    <link href="http://kj9.power-bi.com/Assets/Manager/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="http://kj9.power-bi.com/Assets/Manager/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="http://kj9.power-bi.com/Assets/Scripts/Plugs/dataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/Plugs/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/Plugs/dataTables/js/jquery.dataTables.js"></script>
+
+    <style type="text/css">
+        .listtd {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 80px;
+        }
+
+        .logo2 img {
+            width: 40px !important;
+            margin-bottom: -10px;
+        }
+        #example_length{float:left;margin-top:5px;}
+        
+        .main{width:600px}
+.left{width:300px; float:left; text-align:right; line-height:60px}
+.right{width:300px; float:right; text-align:right; line-height:60px}
+
+.tabletr{background-color:#dcdcdc;}
+
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown-menu :checkbox").click(function () {
+                changedTable();
+            });
+
+changedTable();
+
+            $('#example').DataTable({
+                "pagingType": "full_numbers"
+            });
+
+        });
+
+        function changedTable() {
+            $(".dropdown-menu :checkbox").each(function () {
+                var css = $(this).val();
+                if (this.checked == false) {
+                    $("." + css).hide();
+                } else {
+                    $("." + css).show();
+                }
+            });
+        }
+    </script>
+
  <%= link_to 'New article', new_article_path %>
-<table class = "container", data-url="data3.json" data-height="299" data-show-columns="true" data-id-field="id">
+
  
-  <thead>
-  <tr>
-   
-    <th>Title</th>
-    <th>Keywords</th>
-     <th>Author</th>
-     <th>Research Method</th>
-     <th>Research Participant</th>
-     <th>SE Method</th>
-     <th>Methodology</th>
-     <th>Credibility Ratings</th>
-      <th>DOI</th>
-       <th>Content</th>
-         <th>Language</th>
-          <th>File Type</th>
-           <th>Abstract</th>
-            <th>URL</th>
-             <th>File Size(mb)</th>
-              <th>Created On</th>
-               <th>Last Updated</th>
-  </tr>
- </thead>
- 
-  <% @articles.each do |article| %>
+     <div class="container">
+        <div class="row" >
+           
+            <div  class="right"  >
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger"  >show/hide</button>
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a><input type="checkbox" value="cTitle" checked="checked" />Title</a></li>
+                        <li><a><input type="checkbox" value="cKeywords" checked="checked" />keywords</a></li>
+                        <li><a><input type="checkbox" value="cAuthor" checked="checked" />Author</a></li>
+                        <li><a><input type="checkbox" value="cMethod" checked="checked" />Research Method</a></li>
+                        <li><a><input type="checkbox" value="cParticipant" checked="checked" />Research Participant</a></li>
+                        
+                        <li><a><input type="checkbox" value="cseMethod" checked="checked" />SE Method</a></li>
+                        <li><a><input type="checkbox" value="cMethodology" checked="checked" />Methodology</a></li>
+                         <li><a><input type="checkbox" value="cCredibility" checked="checked" />Credibility Ratings</a></li>
+                         <li><a><input type="checkbox" value="cDOI" checked="false" />DOI</a></li>
+                         <li><a><input type="checkbox" value="cContent" />Content</a></li>
+                         <li><a><input type="checkbox" value="cLanguage"  />Language</a></li>
+                         
+                        <li><a><input type="checkbox" value="cFileType" />File Type</a></li>
+                         <li><a><input type="checkbox" value="cAbstract"/>Abstract</a></li>
+                         <li><a><input type="checkbox" value="cURL" />URL</a></li>
+                         <li><a><input type="checkbox" value="cFilesize"  />File Size(mb)</a></li>
+                          <li><a><input type="checkbox" value="cCreateOn"  />Created On</a></li>
+                         <li><a><input type="checkbox" value="cLastupdate" />Last Updated</a></li>
+                           <li><a><input type="checkbox" value="coption"  />option</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        <div style="overflow:auto;min-height:460px;">
+ <table id="example" class="table-hover" cellspacing="0" width="100%">
+                <thead>
+                    <tr class="tabletr" >
+                        <th class="cTitle">Title</th>
+                        <th class="ckeywords">keywords</th>
+                        <th class="cAuthor">Author</th>
+                        <th class="cMethod">Research Method</th>
+                        <th class="cParticipant">Research Participant</th>
+                        <th class="cseMethod">SE Method</th>
+                        <th class="cMethodology">Methodology</th>
+                        <th class="cCredibility">Credibility Ratings</th>
+                        <th class="cDOI">DOI</th>
+                        <th class="cContent">Content</th>
+                        <th class="cLanguage">Language</th>
+                        <th class="cFileType">File Type</th>
+                        <th class="cAbstract">Abstract</th>
+                        <th class="cURL">URL</th>
+                        <th class="cFilesize">File Size(mb)</th>
+                        <th class="cCreateOn">Created On</th>
+                        <th class="cLastupdate">Last Updated</th>
+                        <th class="coption">option</th>
+                    </tr>
+                </thead>
+
   <tbody>
-    <tr>
-     <br>
-      <td><%= article.title %></td>
-      <td><%= article.Keywords %></td>
-      <td><%= article.Author %></td>
-      <td><%= article.research_method %></td>
-      <td><%= article.research_part %></td>
-      <td><%= article.se_method %></td>
-      <td><%= article.methodology %></td>
-      <td><%= article.rating %></td>
-      <td><%= article.DOI %></td>
-      <td><%= article.Content %></td>
-      <td><%= article.Language %></td>
-      <td><%= article.File_Type %></td>
-      <td><%= article.Abstract %></td>
-      <td><%= article.File_URl %></td>
-      <td><%= article.File_Size %></td>
-      <td><%= article.created_at %></td>
-      <td><%= article.updated_at %></td>
-      <td><%= link_to 'Show', article_path(article) %></td>
-      <td><%= link_to 'Edit', edit_article_path(article) %></td>
+  <% @articles.each do |article| %>
+    <tr> 
+      <td class="cTitle"><p class="listtd"><%= article.title %></p></td>
+      <td class="keywords"><p class="listtd"><%= article.keywords %></p></td>
+      <td class="cAuthor"><%= article.Author %></td>
+      <td class="cMethod"><%= article.research_method %></td>
+      <td class="cParticipant"><%= article.research_part %></td>
+      <td class="cseMethod" ><%= article.se_method %></td>
+      <td class="cMethodology" ><%= article.methodology %></td>
+      <td  class="cCredibility"><%= article.rating %></td>
+      <td  class="cDOI"><%= article.DOI %></td>
+       <td  class="cContent"><p class="listtd"><%= article.Content %></p></td>
+     
+      <td class="cLanguage"><%= article.Language %></td>
+      <td class="cFileType"><%= article.File_Type %></td>
+      <td class="cAbstract"><%= article.Abstract %></td>
+      <td class="cURL"><p class="listtd"><%= article.File_URl %></p></td>
+      <td class="cFilesize"><%= article.File_Size %></td>
+      <td class="cCreateOn"><%= article.created_at %></td>
+      <td  class="cLastupdate"><%= article.updated_at %></td>
+      <td class="coption"><%= link_to 'Show', article_path(article) %> | <%= link_to 'Edit', edit_article_path(article) %></td>
     </tr>
-  </tbody>  
  
   <% end %>
+  </tbody>  
 </table>
+</div>
+</div>
