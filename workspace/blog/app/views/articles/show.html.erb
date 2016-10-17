@@ -1,6 +1,8 @@
 
  
 
+ 
+ <div id="printArea">
 <p>
   <strong>keywords:</strong>
   <%= @article.keywords %>
@@ -67,7 +69,63 @@
   <strong>Last Updated On:</strong>
   <%= @article.updated_at %>
 </p>
+</div>
 
+
+<p>
+        <input type="button" id="btnPrint" value="Print" class="btn btn-info"  />
+        <input type="button" value="Favorite" class="btn btn-info" onclick="return add_favorite(this,'SERLER');" />
+        <input type="button" value="Export PDF" class="btn btn-info" onclick="javascript:window.open('http://kj9.power-bi.com/Assets/07541909.pdf')" />
+ 
+   <p>
 <td><%= link_to 'Edit', edit_article_path(@article) %></td>
 <%= link_to 'Back', articles_path %>
 
+
+
+  <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery-1.11.3.js"></script>
+ <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery.PrintArea.min.js"></script>
+ 
+  <script>  
+     $("#btnPrint").click(function(){    
+         $("#printArea").printArea();  
+     });  
+ 
+
+function add_favorite(a, title, url) {
+  url = url || a.href;
+  title = title || a.title;
+  try{ // IE
+    window.external.addFavorite(url, title);
+  } catch(e) {
+  try{ // Firefox
+    window.sidebar.addPanel(title, url, "");
+  } catch(e) {
+  if (/Opera/.test(window.navigator.userAgent)) { // Opera
+    a.rel = "sidebar";
+    a.href = url;
+    return true;
+  }
+    alert('加入收藏失败，请使用 Ctrl+D 进行添加');
+  }
+  }
+    return false;
+  }
+  function set_homepage(a, url) {
+    var tip = '您的浏览器不支持此操作\n请使用浏览器的“选项”或“设置”等功能设置首页';
+    if (/360se/i.test(window.navigator.userAgent)) {
+    alert(tip);
+    return false;
+  }
+  url = url || a.href;
+  try {
+    a.style.behavior = 'url(#default#homepage)';
+    a.setHomePage(url);
+  } catch(e) {
+    alert(tip);
+  }
+    return false;
+}
+
+    
+ </script> 

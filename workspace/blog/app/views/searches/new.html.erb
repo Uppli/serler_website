@@ -4,9 +4,113 @@
     
 <h1>Advanced Search</h1>
   <script type="text/javascript">
+  
+     function getcontrolval(col)
+        {
+            var Research_method = [];
+            Research_method.push("Case Study");
+            Research_method.push("Field Observation");
+            Research_method.push("Experiment");
+            Research_method.push("Interview");
+            Research_method.push("Survey");
 
+            var Research_participants = [];
+            Research_participants.push("Undergraduate students");
+            Research_participants.push("postgraduate students");
+            Research_participants.push("practitioners");
+
+            var se_method = [];
+            se_method.push("TDD");
+            se_method.push("BDD");
+            se_method.push("pair programming");
+            se_method.push("Planning poker");
+            se_method.push("daily standup meeetings");
+            se_method.push("story boards");
+            se_method.push("user story mapping");
+            se_method.push("continuous integration");
+            se_method.push("retrospectives");
+            se_method.push("burn down charts");
+            se_method.push("requirements prioritisation");
+            se_method.push("version control");
+            se_method.push("code sharing");
+
+            var Methodology = [];
+            Methodology.push("Scrum");
+            Methodology.push("watherfall");
+            Methodology.push("spiral");
+            Methodology.push("xp");
+            Methodology.push("rational unified process");
+            Methodology.push("crystal");
+            Methodology.push("clean room");
+            Methodology.push("feature driven development");
+            Methodology.push("model driven development");
+            Methodology.push("domain driven development");
+            Methodology.push("formal methods");
+            Methodology.push("problem driven development");
+            Methodology.push("cloud computing");
+            Methodology.push("service oriented development");
+            Methodology.push("aspect oriented development");
+            Methodology.push("valuse drive development");
+            Methodology.push("product driven development");
+            Methodology.push("agile");
+
+            if(col == "research_method")
+            {
+                return Research_method;
+            }else if(col == "research_part")
+            {
+                return Research_participants
+            } else if (col == "se_method") {
+                return se_method;
+            } else if (col == "methodology") {
+                return Methodology
+            } else {
+                return [];
+            }
+        }
+
+        function getcontrolhtml(col)
+        {
+            var control = [];//控件
+
+            if (col == "keywords" || col == "title")
+            {
+                control.push('<input type="text" class="form-control" />');
+            } else {
+                control.push('<select class="form-control">');
+                var plist = getcontrolval(col);// get control value
+                for (var i = 0; i < plist.length; i++) {
+                    control.push(' <option value="' + plist[i] + '">' + plist[i] + '</option>');
+                }
+                control.push('</select>');
+            }
+            var html = "";
+            //显示控件
+            for (var i = 0; i < control.length; i++) {
+                html += control[i];
+            }
+
+            return html;
+        }
+  
+        var maxrow=1;//  行数 
+  
+        function onchangecol(obj)
+        {
+            var rid = $(obj).attr("rowid");
+            var val = $(obj).val();
+            var whereid = "divwhere_" + rid;
+            //alert(val);
+            var html = getcontrolhtml(val);
+            $("#"+whereid).html(html);
+            //alert(html);
+        }
+         
+        
         //新增行
         function addnewline() {
+            maxrow = maxrow+1;
+            
             var list = [];
             list.push(' <div class="row form-group query">');
             list.push(' <div class="col-xs-2">');
@@ -16,26 +120,30 @@
             list.push(' </select>');
             list.push(' </div>');
             list.push(' <div class="col-xs-2">');
-            list.push(' <select class="form-control">');
+            list.push(' <select class="form-control" onchange="onchangecol(this)" rowid="'+maxrow+'" >');
             list.push(' <option value="keywords">keywords</option>');
             list.push(' <option value="title">title</option>');
-          //  list.push(' <option value="Author">Author</option>');
-          //    list.push(' <option value="language">language</option>');
+            //list.push(' <option value="Author">Author</option>');
+            //list.push(' <option value="language">language</option>');
             list.push(' <option value="research_method">research_method</option>');
-            list.push(' <option value="research_part">research_part</option>');
+            list.push(' <option value="research_part">research_participants</option>');
             list.push(' <option value="se_method">se_method</option>');
             list.push(' <option value="methodology">methodology</option>');
-            list.push(' <option value="rating">rating</option>');
+            //list.push(' <option value="rating">rating</option>');
             list.push(' </select>');
             list.push(' </div>');
-            list.push(' <div class="col-xs-1 text-center"">');
-            list.push(' in ');
+            list.push(' <div class="col-xs-2"">');
+            list.push(' <select class="form-control">');
+            list.push(' <option value="contains"> contains </option>');
+            list.push(' <option value="starts with"> starts with </option> ');
+            list.push(' <option value="equals to"> equals to </option> ');
+            list.push(' </select>');
             list.push(' </div>');
-            list.push(' <div class="col-xs-2">');
+            list.push(' <div class="col-xs-2" id="divwhere_'+maxrow+'">');
             list.push(' <input type="text" class="form-control" />');
             list.push(' </div>');
             list.push(' <div class="col-xs-1">');
-            list.push(' <input type="button" value="-" class="btn btn-info form-control" onclick="ondelquery(this)" />');
+            list.push(' <input type="button" value="-" class="btn btn-info" onclick="ondelquery(this)" />');
             list.push(' </div>');
             list.push(' </div>');
 
@@ -50,13 +158,14 @@
         {
             $(obj).parent().parent().remove();
         }
+        // 拼接 成 SPARK 要的格式 
         function getquery()
         {
             var list = [];
 
             //获取第一个条件
             var column = $(".queryfirst").find("select").first().val();
-            var val = $("#txtQu").val();
+            var val = $("#txtQu").val(); 
             
             var link = "";
             if (val == "") {
@@ -80,36 +189,75 @@
                 html += list[i];
             }
             $("#search_keywords1").val(html);
-            //alert(html);
             return true;
         }
+        
+        function getcolsql(col,where,val)
+        {
+            var sql="";
+            if(where == "contains")
+            {
+                sql= col + " like '%"+val+"%' ";
+            }else if(where == "starts with")
+            {
+                sql= col + " like '"+val+"%' ";
+            }else if(where == "equals to")
+            {
+                sql= col + " = '"+val+"' ";
+            }
+            
+            return sql;
+        }
+        
+        //  拼接 成 SQL
           function getquerysql()
         {
             var list = [];
 
             //获取第一个条件
-            var column = $(".queryfirst").find("select").first().val();
-            var val = $(".queryfirst").find(":text").first().val();
+            var column = $(".queryfirst").find("select:eq(0)").val();
+            var iwhere = $(".queryfirst").find("select:eq(1)").val();
+            var val = "";
+            if (column == "keywords" || column == "title")
+            {
+               val = $(".queryfirst").find(":text").first().val();
+            }else{
+                val = $(".queryfirst").find("select:eq(2)").val();
+            }
+            
             var link = ""; 
            if (val != "") {
-                list.push("#{" + column + "}:" + link + "#" + val + ";");
+                //list.push("#{" + column + "}:" + link + "#" + val + ";");
+                list.push(getcolsql(column,iwhere,val));
             } else {
-                list.push("2=2");
+                list.push(" 2=2 ");
             }
             
 
             //自定义的条件
             $(".query").each(function () {
-                var link = $(this).find("select").first().val();
-                var column = $(this).find("select").last().val();
-                var val = $(this).find(":text").first().val();
-                list.push(link + " " + column + " in ('" + val + "') ");
+                var link = $(this).find("select:eq(0)").val();
+                var column = $(this).find("select:eq(1)").val();
+                var swhere = $(this).find("select:eq(2)").val();
+                var val="";
+                 if (column == "keywords" || column == "title")
+                {
+                   val = $(this).find(":text").first().val();
+                }else{
+                    val = $(this).find("select:eq(3)").val();
+                }
+                list.push( link +" " + getcolsql(column,swhere,val));
+                //var val = $(this).find(":text").first().val();
+                //list.push(link + " " + column + " in ('" + val + "') ");
             });
             var html = "";
             for (var i = 0; i < list.length; i++) {
                 html += list[i];
             }
+            
             $("#search_keywords1").val(html);
+           // alert(html);
+            return true;
         }
         
          
@@ -123,33 +271,39 @@
 
     <div class="container">
         <br />
-        <br />
+        <br /> <input type="hidden" id="txtQuery" />
+            <%= s.text_field :keywords1,class:"form-control hidden"  %>
         <div class="row form-group queryfirst">
             <div class="col-xs-2">
-            <input type="hidden" id="txtQuery" />
-            <%= s.text_field :keywords1,class:"form-control hidden"  %>
             </div>
             <div class="col-xs-2">
-                <select class="form-control">
+                <select class="form-control"  onchange="onchangecol(this)" rowid="0">
                     <option value="keywords">keywords</option>
                     <option value="title">title</option>
-                  
                     <option value="research_method">research_method</option>
                     <option value="research_part">research_part</option>
                     <option value="se_method">se_method</option>
                     <option value="methodology">methodology</option>
-                    <option value="rating">rating</option>
                 </select>
             </div>
-            <div class="col-xs-1 text-center">
-                in
+           
+            
+             <div class="col-xs-2">
+                <select class="form-control">
+                    <option value="contains">contains</option>
+                    <option value="starts with"> starts with</option>
+                    <option value="equals to"> equals to</option>
+                </select>
             </div>
-            <div class="col-xs-2">
+            
+            <div class="col-xs-2" id="divwhere_0">
                 <input type="text" class="form-control" id="txtQu"/>
             </div>
             <div class="col-xs-1">
-                <div class="row form-group"><%= s.submit :search,class:"btn btn-info form-control" , onclick:"return getquery();" %> </div>
-               <!-- <input type="button" value="-" class="btn btn-info form-control" /> -->
+                <div class="row form-group "> <%= s.submit :search,class:"btn btn-info form-control" , onclick:"return getquerysql();return false;" %> 
+                <!--<input type="button"  class="btn btn-info form-control " value="getsql" onclick="getquerysql();" /> -->
+                </div>
+                
             </div>
         </div>
         <div id="divquerymain">
@@ -164,7 +318,9 @@
             <div class="col-xs-2">
             </div>
             <div class="col-xs-2">
-                <input type="button" value="+" class="btn btn-info form-control" onclick="addnewline();" />
+            </div>
+            <div class="col-xs-2">
+                <input type="button" value="+" class="btn btn-info" onclick="addnewline();" />
             </div>
             <div class="col-xs-2 hidden">
                 <input type="button" value="search" class="btn btn-info form-control" onclick="getquery();" />
