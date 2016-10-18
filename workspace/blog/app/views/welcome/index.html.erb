@@ -1,0 +1,279 @@
+<% # encoding: utf-8 %>
+
+<script type="text/javascript">
+
+ function oncheckkey()
+ {
+  var val = document.getElementById("search").value;
+  if(val == "")
+  {
+   document.getElementById("pmsg").innerText=" enter one or more keywords!";
+   //alert("please input key...");
+   return false;
+  }
+  return true;
+ }
+</script>
+
+<%= form_tag(articles_path, :method => "get", id: "search-form") do %>
+<div class="container">
+ <div class="row form-group" style="margin-top:60px;" >
+  <div class="col-xs-6 col-xs-offset-5">
+   <%= image_tag ("canvas.png") %> 
+   </div>
+   </div>
+ <div class="row form-group" style="margin-top:30px;" >
+  <div class="col-xs-4"></div>
+  <div class="col-xs-4">
+   <%= text_field_tag :search, params[:search], placeholder: "enter one or more keywords...",class:"form-control" %>
+   
+  </div>
+  <div class="col-xs-1"> <%= submit_tag "Search",class:"form-control", :name => nil,class:"form-control btn-primary",onclick:"return oncheckkey();" %></div>
+  
+ </div>
+ 
+ <div class="row form-group">
+  <div class="col-xs-4"></div>
+  <div class="col-xs-2">
+   <%= link_to 'Advanced Search', new_search_path,:class=>'btn btn-sm btn-primary form-control' %></div>
+  <div class="col-xs-2"> <%= link_to 'Articles Input', new_article_path,:class=>'btn btn-sm btn-info form-control', remote: true %>
+  
+  </div>
+ </div>
+ <div class="row form-group">
+  <div class="col-xs-4"></div>
+  <div class="col-xs-8">
+   <p class="text-danger" id="pmsg"></p>
+  </div>
+ </div>
+<% end %>
+</div>
+
+<%# To display articles on home page %>
+
+<link href="http://kj9.power-bi.com/Assets/Manager/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="http://kj9.power-bi.com/Assets/Manager/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="http://kj9.power-bi.com/Assets/Scripts/Plugs/dataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery-1.11.3.js"></script>
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/jquery.json-2.3.min.js"></script>
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/Plugs/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://kj9.power-bi.com/Assets/Scripts/Plugs/dataTables/js/jquery.dataTables.js"></script>
+
+    <style type="text/css">
+        .listtd {
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 80px;
+        }
+
+        .logo2 img {
+            width: 40px !important;
+            margin-bottom: -10px;
+        }
+        #example_length{float:left;margin-top:5px;}
+        
+        .main{width:600px}
+.left{width:300px; float:left; text-align:right; line-height:60px}
+.right{width:300px; float:right; text-align:right; line-height:60px}
+
+.tabletr{background-color:#dcdcdc;}
+
+.divtopad{position:fixed;top:80px;left:65%;  height:100px; float:right; z-index:100; }
+
+    </style>
+    
+    
+    <style type="text/css">
+body{ color:#333; font-size:13px;}
+h3,ul,li{margin:0;padding:0; list-style:none;}
+.scrollbox{width:680px; margin:0 auto; overflow:hidden;padding:10px;}
+#scrollDiv{width:680px;height:359px; overflow:hidden;}/*这里的高度和超出隐藏是必须的*/
+#scrollDiv li{height:90px; width:740px; padding:0 20px;background:url(http://kj9.power-bi.com/Assets/images/ico-4.gif) no-repeat 10px 23px; overflow:hidden; vertical-align:bottom; zoom:1; border-bottom:#B7B7B7 dashed 1px;}
+#scrollDiv li h3{ height:48px; padding-top:13px; font-size:14px; color:#353535; line-height:24px; width:680px;}
+#scrollDiv li h3 a{color:#353535; text-decoration:none}#scrollDiv li h3 a:hover{ color:#F00}
+#scrollDiv li div{ height:36px; width:680px; color:#416A7F; line-height:18px; overflow:hidden}
+#scrollDiv li div a{ color:#416A7F; text-decoration:none}
+
+.scroltit{ height:26px; line-height:26px; padding-bottom:4px; margin-bottom:4px;}
+.scroltit h3{ width:100px; float:left;}
+.scroltit .updown{float:right; width:32px; height:22px; margin-left:4px}
+#but_up{ background:  url(http://kj9.power-bi.com/Assets/images/up.gif) no-repeat 0 0; text-indent:-9999px}
+#but_down{ background:url(http://kj9.power-bi.com/Assets/images/down.gif) no-repeat 0 0; text-indent:-9999px}
+
+
+#n{margin:10px auto; width:920px; border:1px solid #CCC;font-size:12px; line-height:30px;}
+#n a{ padding:0 4px; color:#333}
+</style>
+
+
+
+<script src="http://kj9.power-bi.com/Assets/Scripts/jq_scroll.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+        $("#scrollDiv").Scroll({line:1,speed:500,timer:3000,up:"but_up",down:"but_down"});
+});
+</script>
+
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown-menu :checkbox").click(function () {
+                changedTable();
+            });
+
+changedTable();
+
+            $('#example').DataTable({
+                "pagingType": "full_numbers"
+            });
+
+        });
+
+        function changedTable() {
+            $(".dropdown-menu :checkbox").each(function () {
+                var css = $(this).val();
+                if (this.checked == false) {
+                    $("." + css).hide();
+                } else {
+                    $("." + css).show();
+                }
+            });
+        }
+    </script>
+
+
+
+ 
+     <div class="container">
+        <div class="row" >
+           
+            <div  class="right"  >
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger"  >show/hide</button>
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                        <span class="caret"></span>
+                        <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a><input type="checkbox" value="cTitle" checked="checked" />Title</a></li>
+                        <li><a><input type="checkbox" value="cKeywords" checked="checked" />keywords</a></li>
+                        <li><a><input type="checkbox" value="cAuthor" checked="checked" />Author</a></li>
+                        <li><a><input type="checkbox" value="cMethod" checked="checked" />Research Method</a></li>
+                        <li><a><input type="checkbox" value="cParticipant" checked="checked" />Research Participant</a></li>
+                        
+                        <li><a><input type="checkbox" value="cseMethod" checked="checked" />SE Method</a></li>
+                        <li><a><input type="checkbox" value="cMethodology" checked="checked" />Methodology</a></li>
+                         <li><a><input type="checkbox" value="cCredibility" checked="checked" />Credibility Ratings</a></li>
+                         <li><a><input type="checkbox" value="cDOI" checked="false" />DOI</a></li>
+                         <li><a><input type="checkbox" value="cContent" />Content</a></li>
+                         <li><a><input type="checkbox" value="cLanguage"  />Language</a></li>
+                         
+                        <li><a><input type="checkbox" value="cFileType" />File Type</a></li>
+                         <li><a><input type="checkbox" value="cAbstract"/>Abstract</a></li>
+                         <li><a><input type="checkbox" value="cURL" />URL</a></li>
+                         <li><a><input type="checkbox" value="cFilesize"  />File Size(mb)</a></li>
+                          <li><a><input type="checkbox" value="cCreateOn"  />Created On</a></li>
+                         <li><a><input type="checkbox" value="cLastupdate" />Last Updated</a></li>
+                           <li><a><input type="checkbox" value="coption"  />option</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="container">
+        <div style="overflow:auto;min-height:360px;">
+ <table id="example" class="table-hover" cellspacing="0" width="100%">
+                <thead>
+                    <tr class="tabletr" >
+                        <th class="cTitle">Title</th>
+                        <th class="ckeywords">keywords</th>
+                        <th class="cAuthor">Author</th>
+                        <th class="cMethod">Research Method</th>
+                        <th class="cParticipant">Research Participant</th>
+                        <th class="cseMethod">SE Method</th>
+                        <th class="cMethodology">Methodology</th>
+                        <th class="cCredibility">Credibility Ratings</th>
+                        <th class="cDOI">DOI</th>
+                        <th class="cContent">Content</th>
+                        <th class="cLanguage">Language</th>
+                        <th class="cFileType">File Type</th>
+                        <th class="cAbstract">Abstract</th>
+                        <th class="cURL">URL</th>
+                        <th class="cFilesize">File Size(mb)</th>
+                        <th class="cCreateOn">Created On</th>
+                        <th class="cLastupdate">Last Updated</th>
+                        <th class="coption">option</th>
+                    </tr>
+                </thead>
+
+  <tbody>
+  <% @list.each do |article| %>
+    <tr> 
+      <td class="cTitle"><p class="listtd"><%= article.title %></p></td>
+      <td class="keywords"><p class="listtd"><%= article.keywords %></p></td>
+      <td class="cAuthor"><%= article.author %></td>
+      <td class="cMethod"><%= article.research_method %></td>
+      <td class="cParticipant"><%= article.research_part %></td>
+      <td class="cseMethod" ><%= article.se_method %></td>
+      <td class="cMethodology" ><%= article.methodology %></td>
+      <td  class="cCredibility"><%= article.rating %></td>
+      <td  class="cDOI"><%= article.DOI %></td>
+       <td  class="cContent"><p class="listtd"><%= article.Content %></p></td>
+     
+      <td class="cLanguage"><%= article.Language %></td>
+      <td class="cFileType"><%= article.File_Type %></td>
+      <td class="cAbstract"><%= article.Abstract %></td>
+      <td class="cURL"><p class="listtd"><%= article.File_URl %></p></td>
+      <td class="cFilesize"><%= article.File_Size %></td>
+      <td class="cCreateOn"><%= article.created_at %></td>
+      <td  class="cLastupdate"><%= article.updated_at %></td>
+      <td class="coption"><%= link_to 'Show', article_path(article) %> | <%= link_to 'Edit', edit_article_path(article) %></td>
+    </tr>
+ 
+  <% end %>
+  </tbody>  
+</table>
+</div>
+</div>
+<div class="divtopad">
+   
+
+<div class="scrollbox">
+    <div id="scrollDiv">
+        <ul>
+          
+            
+           <% @list.each do |article| %>
+    
+            <li><h3><a href="#" class="linktit"><%= article.title %></a></h3> <div><%= article.keywords %> </div></li>
+       
+ 
+  <% end %>
+  
+        </ul>
+    </div>
+    <div class="scroltit"><div class="updown" id="but_down">向上</div><div class="updown" id="but_up">向下</div></div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+ 
+
+    
+    
