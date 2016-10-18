@@ -3,6 +3,7 @@ language: ruby
 rvm:
   - 2.3.0
 before_script:
+  - cd workspace/blog
   - bundle exec rake db:create
   - bundle exec rake db:migrate
 script: 
