@@ -1,5 +1,3 @@
-<% # encoding: utf-8 %>
-
 <script type="text/javascript">
 
  function oncheckkey()
@@ -28,7 +26,7 @@
    <%= text_field_tag :search, params[:search], placeholder: "enter one or more keywords...",class:"form-control" %>
    
   </div>
-  <div class="col-xs-1"> <%= submit_tag "Search",class:"form-control", :name => nil,class:"form-control btn-primary",onclick:"return oncheckkey();" %></div>
+  <div class="col-xs-1"> <%= submit_tag "Search",class:"form-control", :name => nil,class:"form-control",onclick:"return oncheckkey();" %></div>
   
  </div>
  
@@ -36,7 +34,7 @@
   <div class="col-xs-4"></div>
   <div class="col-xs-2">
    <%= link_to 'Advanced Search', new_search_path,:class=>'btn btn-sm btn-primary form-control' %></div>
-  <div class="col-xs-2"> <%= link_to 'Articles Input', new_article_path,:class=>'btn btn-sm btn-info form-control', remote: true %>
+  <div class="col-xs-2"> <%= link_to 'Input Articles', new_article_path,:class=>'btn btn-sm btn-info form-control', remote: true %>
   
   </div>
  </div>
